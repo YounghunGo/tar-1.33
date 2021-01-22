@@ -185,11 +185,11 @@ getwidth (FILE *fp)
   if (ioctl (fileno (fp), TIOCGWINSZ, &ws) == 0 && 0 < ws.ws_col)
     return ws.ws_col;
 #endif
-
+	/* 환경 변수의 columns을 구함 */
   columns = getenv ("COLUMNS");
   if (columns)
     {
-      long int col = strtol (columns, NULL, 10);
+      long int col = strtol (columns, NULL, 10); /* 10진수를 정수로 반환 */
       if (0 < col)
 	return col;
     }

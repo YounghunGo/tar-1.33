@@ -1346,7 +1346,7 @@ static nlink_t trivial_link_count;
 void
 create_archive (void)
 {
-  struct name const *p;
+  struct name const *p; /* archive 대상 파일 담겨있는 구조체 */
 
   trivial_link_count = filename_args != FILES_MANY && ! dereference_option;
 

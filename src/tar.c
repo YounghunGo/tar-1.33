@@ -2344,7 +2344,7 @@ decode_options (int argc, char **argv)
 			      *letter));
 	    }
 	}
-
+/*dfdsfasf*/
       /* Copy all remaining options.  */
 
       while (in < argv + argc)
@@ -2736,23 +2736,23 @@ tar_print_progname (void)
 int
 main (int argc, char **argv)
 {
-  set_start_time ();
+  set_start_time ();/* buffer.c */
   set_program_name (argv[0]);
 #ifdef ENABLE_ERROR_PRINT_PROGNAME
   error_print_progname = tar_print_progname;
 #endif
-  setlocale (LC_ALL, "");
+  setlocale (LC_ALL, "");/* 출력에 관한 함수, 특정 형식이 사용 가능하게끔 하는듯*/
   bindtextdomain (PACKAGE, LOCALEDIR);
   textdomain (PACKAGE);
 
   exit_failure = TAREXIT_FAILURE;
   exit_status = TAREXIT_SUCCESS;
-  error_hook = checkpoint_flush_actions;
+  error_hook = checkpoint_flush_actions;/* tty 장치를 fflush하는 함수 */
 
   set_quoting_style (0, DEFAULT_QUOTING_STYLE);
 
   /* Make sure we have first three descriptors available */
-  stdopen ();
+  stdopen (); /* stdopen.c, 저장 공간이 충분한지 확인 */
 
   /* Pre-allocate a few structures.  */
 
@@ -2762,14 +2762,14 @@ main (int argc, char **argv)
   archive_names = 0;
 
   /* System V fork+wait does not work if SIGCHLD is ignored.  */
-  signal (SIGCHLD, SIG_DFL);
+  signal (SIGCHLD, SIG_DFL); /* 부모 프로세스가 자식 프로세스의 종료 상태에 관심을 갖지 않음. 즉 좀비 x */
 
   /* Try to disable the ability to unlink a directory.  */
   priv_set_remove_linkdir ();
 
   /* Decode options.  */
 
-  decode_options (argc, argv);
+  decode_options (argc, argv); /* 옵션 해독 */
 
   name_init ();
 
@@ -2795,7 +2795,7 @@ main (int argc, char **argv)
       break;
 
     case CREATE_SUBCOMMAND:
-      create_archive ();
+      create_archive (); /* buffer.c */
       break;
 
     case EXTRACT_SUBCOMMAND:
